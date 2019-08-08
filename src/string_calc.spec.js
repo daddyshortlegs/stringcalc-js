@@ -25,7 +25,7 @@ describe('String calculator', function() {
         expect(add("//;\n1;2")).toEqual(3);
     });
 
-    it ('should disallow negatives', function() {
+    it ('should disallow negatives', () => {
         expect(() => {
             add("1,-2,-3");
         }).toThrowError("error: negatives not allowed: -2 -3");
@@ -33,6 +33,9 @@ describe('String calculator', function() {
         expect(() => {
             add("2,-4,-9");
         }).toThrowError("error: negatives not allowed: -4 -9");
+    });
 
+    it ('should ignore numbers bigger than 1000', () => {
+        expect(add("1001, 2")).toEqual(2);
     });
 });

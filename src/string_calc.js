@@ -5,7 +5,11 @@ function add(theString) {
 
     const strings = splitValuesByDelimiter(theString);
     throwErrorIfNegatives(strings);
-    return sumValues(strings);
+
+    let filteredNumbers = strings.map(s => parseInt(s))
+        .filter(i => i < 1001);
+
+    return sumValues(filteredNumbers);
 }
 
 function splitValuesByDelimiter(theString) {
