@@ -1,4 +1,4 @@
-import {splitValuesByDelimiter} from "./splitter";
+import {splitNumbersFromInput} from "./splitter";
 
 function add(theString) {
     if (theString === "") {
@@ -15,11 +15,6 @@ function totalUpRelevantNumbers(theString) {
     return sumValues(filteredNumbers);
 }
 
-function splitNumbersFromInput(theString) {
-    const strings = splitValuesByDelimiter(theString);
-    return toArrayOfInts(strings);
-}
-
 function throwErrorIfNegatives(numbers) {
     let negatives = numbers.filter(i => i < 0);
     if (negatives.length > 0) {
@@ -33,10 +28,6 @@ function filterNumbers(numbers) {
 
 function sumValues(numbers) {
     return numbers.reduce((total, acc) => total + acc);
-}
-
-function toArrayOfInts(strings) {
-    return strings.map(s => parseInt(s));
 }
 
 export {add}
