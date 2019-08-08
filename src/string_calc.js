@@ -4,12 +4,7 @@ function add(theString) {
     }
 
     const strings = splitValuesByDelimiter(theString);
-    let negatives = strings.map(s => parseInt(s)).
-        filter(i => i < 0);
-    if (negatives.length > 0) {
-        throw "error: negatives not allowed: -2 -3";
-    }
-
+    throwErrorIfNegatives(strings);
     return sumValues(strings);
 }
 
@@ -25,6 +20,13 @@ function splitValuesByDelimiter(theString) {
     }
 
     return theString.split(separator);
+}
+
+function throwErrorIfNegatives(strings) {
+    let negatives = strings.map(s => parseInt(s)).filter(i => i < 0);
+    if (negatives.length > 0) {
+        throw "error: negatives not allowed:" + negatives.reduce((acc, item) => acc + " " + item, "");
+    }
 }
 
 function sumValues(strings) {

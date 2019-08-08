@@ -29,5 +29,10 @@ describe('String calculator', function() {
         expect(() => {
             add("1,-2,-3");
         }).toThrowError("error: negatives not allowed: -2 -3");
+
+        expect(() => {
+            add("2,-4,-9");
+        }).toThrowError("error: negatives not allowed: -4 -9");
+
     });
 });
