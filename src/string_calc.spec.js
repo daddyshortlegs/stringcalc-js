@@ -5,4 +5,10 @@ describe('just testing', function() {
         const result = add("");
         expect(result).toEqual(0);
     });
+
+    it('should return 4 when passed in', function() {
+        const result = add("4");
+        expect(result).toEqual(4);
+    });
+
 });

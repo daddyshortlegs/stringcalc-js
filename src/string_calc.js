@@ -1,5 +1,8 @@
-function add(string) {
-    return 0;
+function add(numbers) {
+    if (numbers === "") {
+        return 0;
+    }
+    return parseInt(numbers);
 }
 
 export {add}
