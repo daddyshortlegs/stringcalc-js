@@ -1,3 +1,5 @@
+import {splitValuesByDelimiter} from "./splitter";
+
 function add(theString) {
     if (theString === "") {
         return 0;
@@ -5,25 +7,8 @@ function add(theString) {
 
     const strings = splitValuesByDelimiter(theString);
     throwErrorIfNegatives(strings);
-
-    let filteredNumbers = strings.map(s => parseInt(s))
-        .filter(i => i < 1001);
-
+    const filteredNumbers = filterNumbers(strings);
     return sumValues(filteredNumbers);
-}
-
-function splitValuesByDelimiter(theString) {
-    let regExp = RegExp(/\/\/(.*)\n(.*)/);
-    let matches = regExp.exec(theString);
-    let separator;
-    if (matches !== null) {
-        separator = matches[1];
-        theString = matches[2];
-    } else {
-        separator = /,|\n/
-    }
-
-    return theString.split(separator);
 }
 
 function throwErrorIfNegatives(strings) {
@@ -31,6 +16,11 @@ function throwErrorIfNegatives(strings) {
     if (negatives.length > 0) {
         throw "error: negatives not allowed:" + negatives.reduce((acc, item) => acc + " " + item, "");
     }
+}
+
+function filterNumbers(strings) {
+    return strings.map(s => parseInt(s))
+        .filter(i => i < 1001);
 }
 
 function sumValues(strings) {
