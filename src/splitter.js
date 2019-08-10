@@ -18,23 +18,20 @@ export function splitValuesByDelimiter(theString) {
 }
 
 function splitByArbitraryLengthDelimiter(theString) {
-    let arbitraryLength = RegExp(/\/\/\[(.*)\]\n(.*)/)
-    let regExpExecArray = arbitraryLength.exec(theString);
-    let splitItems = [];
-    if (regExpExecArray !== null) {
-        theString = regExpExecArray[2];
-        splitItems = theString.split(regExpExecArray[1]);
-    }
-    return splitItems;
+    return splitByDelimiter(/\/\/\[(.*)\]\n(.*)/, theString);
 }
 
 function splitByCustomDelimter(theString) {
-    let regExp = RegExp(/\/\/(.*)\n(.*)/);
-    let matches = regExp.exec(theString);
+    return splitByDelimiter(/\/\/(.*)\n(.*)/, theString);
+}
+
+function splitByDelimiter(regExp1, theString) {
+    let regExp = RegExp(regExp1)
+    let groups = regExp.exec(theString);
     let splitItems = [];
-    if (matches !== null) {
-        theString = matches[2];
-        splitItems = theString.split(matches[1]);
+    if (groups !== null) {
+        theString = groups[2];
+        splitItems = theString.split(groups[1]);
     }
     return splitItems;
 }
