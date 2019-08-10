@@ -4,31 +4,39 @@ export function splitNumbersFromInput(theString) {
 }
 
 export function splitValuesByDelimiter(theString) {
-    let arbitraryLength = RegExp(/\/\/\[(.*)\]\n(.*)/)
-    let regExpExecArray = arbitraryLength.exec(theString);
-    let separator;
-
-    if (regExpExecArray !== null) {
-        separator = regExpExecArray[1];
-        theString = regExpExecArray[2];
-
-        return theString.split(separator);
+    let splitItems = splitByArbitraryLengthDelimiter(theString);
+    if (splitItems.length > 0) {
+        return splitItems;
     }
 
-
-
-
-    let regExp = RegExp(/\/\/(.*)\n(.*)/);
-    let matches = regExp.exec(theString);
-    if (matches !== null) {
-        separator = matches[1];
-        theString = matches[2];
-        return theString.split(separator);
+    splitItems = splitByCustomDelimter(theString);
+    if (splitItems.length > 0) {
+        return splitItems;
     }
-
-
 
     return theString.split(/[,\n]/);
+}
+
+function splitByArbitraryLengthDelimiter(theString) {
+    let arbitraryLength = RegExp(/\/\/\[(.*)\]\n(.*)/)
+    let regExpExecArray = arbitraryLength.exec(theString);
+    let splitItems = [];
+    if (regExpExecArray !== null) {
+        theString = regExpExecArray[2];
+        splitItems = theString.split(regExpExecArray[1]);
+    }
+    return splitItems;
+}
+
+function splitByCustomDelimter(theString) {
+    let regExp = RegExp(/\/\/(.*)\n(.*)/);
+    let matches = regExp.exec(theString);
+    let splitItems = [];
+    if (matches !== null) {
+        theString = matches[2];
+        splitItems = theString.split(matches[1]);
+    }
+    return splitItems;
 }
 
 
