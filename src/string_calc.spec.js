@@ -39,7 +39,7 @@ describe('String calculator', function() {
         expect(add("1001, 2")).toEqual(2);
     });
 
-    xit ('should split by arbitrary length separator', () => {
+    it ('should split by arbitrary length separator', () => {
         expect(add("//[***]\n1***2***3")).toEqual(6);
     });
 });
