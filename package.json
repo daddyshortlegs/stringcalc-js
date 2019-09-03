@@ -12,6 +12,7 @@
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
     "jest": "^24.8.0",
+    "jest-junit": "^8.0.0",
     "nyc": "^14.1.1"
   },
   "jest": {
